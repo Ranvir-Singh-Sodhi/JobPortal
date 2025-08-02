@@ -1,0 +1,94 @@
+{% load static %}
+
+
+{% block body %}
+
+{% include "user_navigation.html" %}
+
+<marquee style="font-family: Corsiva;font-style: 25px;color: darkcyan;background-color: black;font-weight: bold;margin-top: 1%;">
+    User Profile
+</marquee>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+
+<form class="mt-5" name="signup" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="fname"><b>First Name</b></label>
+            <input type="text" class="form-control" name="fname" value="{{student.user.first_name}}" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="lname"><b>Last Name</b></label>
+            <input type="text" class="form-control" name="lname" value="{{student.user.last_name}}" required>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="contact"><b>Contact No</b></label>
+            <input type="phone" class="form-control" name="contact" value="{{student.mobile}}" required>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="email"><b>Email ID</b></label>
+            <input type="email" class="form-control" name="email" readonly value="{{student.user.username}}" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label><b>Gender: </b></label>
+            {% if student.gender == 'Male' %}
+            <div style="border: 1px solid lightgrey;padding: 6px;border-radius: 6px;">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="CustomRadioInline1" name="gender" class="custom-control-input" value="Male" checked>
+                    <label for="CustomRadioInline1" class="custom-control-label"><b>Male</b></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="CustomRadioInline2" name="gender" class="custom-control-input"
+                        value="Female">
+                    <label for="CustomRadioInline2" class="custom-control-label"><b>Female</b></label>
+                </div>
+            </div>
+            {% else %}
+            <div style="border: 1px solid lightgrey;padding: 6px;border-radius: 6px;">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="CustomRadioInline1" name="gender" class="custom-control-input" value="Male">
+                    <label for="CustomRadioInline1" class="custom-control-label"><b>Male</b></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="CustomRadioInline2" name="gender" class="custom-control-input"
+                        value="Female" checked>
+                    <label for="CustomRadioInline2" class="custom-control-label"><b>Female</b></label>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="form-group col-md-6">
+            <label for="image"><b>Image</b></label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+        </div>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary my-3">
+</form>
+        </div><!-- col 1 end -->
+        <div class="col-sm-4 mt-5 text-center">
+            <img src="{{student.image.url}}" width="300px" height="300px">
+        </div>
+    </div><!-- row end -->
+</div>
+
+{% include "footer.html" %}
+
+{% if error == "no" %}
+    <script>
+        alert("Profile Updated Successfully!");
+        window.location=('{% url "user_home" %}')
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert("Something went wrong,Try Again...");
+    </script>
+{% endif %}
+
+
+{% endblock %}

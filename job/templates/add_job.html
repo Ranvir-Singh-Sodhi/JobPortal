@@ -1,0 +1,72 @@
+{% load static %}
+
+
+{% block body %}
+
+{% include "recruiter_navigation.html" %}
+
+<marquee style="font-family: Corsiva;font-style: 25px;color: darkcyan;background-color: black;font-weight: bold;margin-top: 1%;">
+    Add Job Details
+</marquee>
+<hr>
+<form class="container mt-5" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="jobTitle"><b>Job Title</b></label>
+            <input type="text" class="form-control" name="jobTitle" placeholder="Enter Job Title" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="startDate"><b>Start Date</b></label>
+            <input type="date" class="form-control" name="startDate" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="endDate"><b>End Date</b></label>
+            <input type="date" class="form-control" name="endDate" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="salary"><b>Salary(Per Month)</b></label>
+            <input type="text" class="form-control" name="salary" placeholder="Enter Salary" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="logo"><b>Company Logo</b></label>
+            <input type="file" class="form-control" name="logo" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="experience"><b>Experience(In Years)</b></label>
+            <input type="text" class="form-control" name="experience" placeholder="Experience Required" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="location"><b>Company Location</b></label>
+            <input type="text" class="form-control" name="location" placeholder="Enter Location" required>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="skills"><b>Skills</b></label>
+            <input type="text" class="form-control" name="skills" placeholder="Skills Required" required>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="description"><b>Description</b></label>
+            <textarea class="form-control" name="description" placeholder="Enter Description" required></textarea>
+        </div>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary my-3">
+</form>
+
+{% include "footer.html" %}
+
+{% if error == "no" %}
+    <script>
+        alert("Job added successfully");
+        window.location=('{% url "job_list" %}')
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert("Something went wrong,Try Again...");
+    </script>
+{% endif %}
+
+
+
+{% endblock %}
