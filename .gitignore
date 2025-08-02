@@ -1,6 +1,35 @@
-*.pyc 
-__pycache__/ 
-db.sqlite3 
-.env 
-/media/ 
-/staticfiles/ 
+# === Python Cache Files ===
+*.py[cod]
+__pycache__/
+*.so
+
+# === Django Specific ===
+db.sqlite3
+*.log
+.env
+/media/
+/staticfiles/
+
+# === Migrations (optional to ignore) ===
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# === IDEs / Editors ===
+.vscode/
+.idea/
+*.swp
+
+# === OS Generated ===
+.DS_Store
+Thumbs.db
+
+# === Virtual Environment (optional) ===
+venv/
+env/
+
+# === Test / Coverage ===
+coverage/
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
